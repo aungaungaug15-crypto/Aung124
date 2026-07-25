@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 
@@ -13,6 +13,14 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        router.push("/dashboard");
+      }
+    });
+  }, [router]);
 
   const handleLogin = async () => {
     setMessage("Login ဝင်နေပါသည်...");
@@ -44,40 +52,46 @@ export default function Home() {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "400px", margin: "50px auto", fontFamily: "sans-serif" }}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={{ width: "100%", padding: "10px", marginBottom: "10px", boxSizing: "border-box" }}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={{ width: "100%", padding: "10px", marginBottom: "15px", boxSizing: "border-box" }}
-      />
-      <div style={{ display: "flex", gap: "10px" }}>
-        <button
-          onClick={handleLogin}
-          style={{ flex: 1, padding: "10px", backgroundColor: "#0070f3", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}
-        >
-          Login
-        </button>
-        <button
-          onClick={handleRegister}
-          style={{ flex: 1, padding: "10px", backgroundColor: "#10b981", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}
-        >
-          Register
-        </button>
-      </div>
-      {message && (
-        <div style={{ marginTop: "15px", padding: "10px", backgroundColor: "#333", color: "gold", borderRadius: "5px" }}>
-          {message}
+    <div style={{ backgroundColor: "#0f172a", minHeight: "100vh", color: "white", padding: "20px", fontFamily: "sans-serif" }}>
+      <div style={{ maxWidth: "400px", margin: "50px auto", backgroundColor: "#1e293b", padding: "25px", borderRadius: "10px", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.5)" }}>
+        <h2 style={{ textAlign: "center", marginBottom: "20px", color: "#38bdf8" }}>📱 Myanmar OTP Store</h2>
+        
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ width: "100%", padding: "12px", marginBottom: "10px", boxSizing: "border-box", borderRadius: "5px", border: "1px solid #475569", backgroundColor: "#0f172a", color: "white" }}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{ width: "100%", padding: "12px", marginBottom: "15px", boxSizing: "border-box", borderRadius: "5px", border: "1px solid #475569", backgroundColor: "#0f172a", color: "white" }}
+        />
+        
+        <div style={{ display: "flex", gap: "10px" }}>
+          <button
+            onClick={handleLogin}
+            style={{ flex: 1, padding: "12px", backgroundColor: "#2563eb", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontWeight: "bold" }}
+          >
+            Login
+          </button>
+          <button
+            onClick={handleRegister}
+            style={{ flex: 1, padding: "12px", backgroundColor: "#10b981", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontWeight: "bold" }}
+          >
+            Register
+          </button>
         </div>
-      )}
+
+        {message && (
+          <div style={{ marginTop: "15px", padding: "10px", backgroundColor: "#334155", color: "#facc15", borderRadius: "5px", textAlign: "center" }}>
+            {message}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
