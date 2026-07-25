@@ -10,11 +10,9 @@ export default function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
-    // User အကောင့်ဝင်ထားခြင်း ရှိမရှိ စစ်ဆေးခြင်း
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        // Login မဝင်ထားပါက Login Page သို့ ရွှေ့မည်
         router.push('/login');
       } else {
         setUser(session.user);
@@ -37,7 +35,7 @@ export default function HomePage() {
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto', fontFamily: 'sans-serif', color: 'white' }}>
       {/* Header Section */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #333', pb: '10px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #333', paddingBottom: '10px' }}>
         <h2>🔥 Crypto Exchange Guide Dashboard</h2>
         <button 
           onClick={handleSignOut}
