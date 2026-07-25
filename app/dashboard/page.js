@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import Link from "next/link";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -34,7 +35,6 @@ export default function Dashboard() {
       alert("ကျေးဇူးပြု၍ Service တစ်ခု ရွေးချယ်ပါ!");
       return;
     }
-    // နမူနာ ဖုန်းနံပါတ် (+959...)
     setOtpNumber("+95 9 7912 34567");
     setReceivedOtp("Waiting for SMS...");
   };
@@ -44,11 +44,14 @@ export default function Dashboard() {
       {/* Header Bar */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #334155", paddingBottom: "15px" }}>
         <h2>📱 Myanmar OTP Store</h2>
-        <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <span style={{ backgroundColor: "#1e293b", padding: "8px 15px", borderRadius: "20px", border: "1px solid #3b82f6" }}>
             💰 Balance: <b>${balance.toFixed(2)}</b>
           </span>
-          <button onClick={handleLogout} style={{ backgroundColor: "#ef4444", color: "white", border: "none", padding: "8px 15px", borderRadius: "5px", cursor: "pointer" }}>
+          <Link href="/deposit" style={{ backgroundColor: "#22c55e", color: "white", padding: "8px 12px", borderRadius: "5px", textDecoration: "none", fontWeight: "bold" }}>
+            + Deposit
+          </Link>
+          <button onClick={handleLogout} style={{ backgroundColor: "#ef4444", color: "white", border: "none", padding: "8px 12px", borderRadius: "5px", cursor: "pointer" }}>
             Logout
           </button>
         </div>
