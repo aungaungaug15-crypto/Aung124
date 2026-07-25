@@ -34,8 +34,8 @@ export default function Dashboard() {
       alert("ကျေးဇူးပြု၍ Service တစ်ခု ရွေးချယ်ပါ!");
       return;
     }
-    // API နမူနာ ချိတ်ဆက်မှု
-    setOtpNumber("+1 234 567 8901");
+    // မြန်မာ ဖုန်းနံပါတ် နမူနာ (+959...)
+    setOtpNumber("+95 9 1234 5678");
     setReceivedOtp("Waiting for SMS...");
   };
 
@@ -43,7 +43,7 @@ export default function Dashboard() {
     <div style={{ backgroundColor: "#0f172a", minHeight: "100vh", color: "white", fontFamily: "sans-serif", padding: "20px" }}>
       {/* Header Bar */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #334155", paddingBottom: "15px" }}>
-        <h2>📱 OTP Store</h2>
+        <h2>📱 Myanmar OTP Store</h2>
         <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
           <span style={{ backgroundColor: "#1e293b", padding: "8px 15px", borderRadius: "20px", border: "1px solid #3b82f6" }}>
             💰 Balance: <b>${balance.toFixed(2)}</b>
@@ -56,7 +56,15 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <div style={{ maxWidth: "600px", margin: "30px auto", backgroundColor: "#1e293b", padding: "25px", borderRadius: "10px", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.5)" }}>
-        <h3>1. Select Service</h3>
+        
+        {/* Country Selector (Myanmar Only) */}
+        <h3 style={{ marginBottom: "10px" }}>1. Country</h3>
+        <div style={{ padding: "12px", borderRadius: "5px", border: "1px solid #3b82f6", backgroundColor: "#0f172a", color: "#38bdf8", marginBottom: "20px", fontWeight: "bold" }}>
+          🇲🇲 Myanmar (+95)
+        </div>
+
+        {/* Service Selector */}
+        <h3 style={{ marginBottom: "10px" }}>2. Select Service</h3>
         <select 
           onChange={(e) => setSelectedService(e.target.value)}
           style={{ width: "100%", padding: "12px", borderRadius: "5px", border: "1px solid #475569", backgroundColor: "#0f172a", color: "white", marginBottom: "20px" }}
@@ -64,6 +72,7 @@ export default function Dashboard() {
           <option value="">-- Select App --</option>
           <option value="telegram">Telegram ($0.50)</option>
           <option value="whatsapp">WhatsApp ($0.60)</option>
+          <option value="viber">Viber ($0.45)</option>
           <option value="facebook">Facebook ($0.30)</option>
           <option value="tiktok">TikTok ($0.25)</option>
         </select>
@@ -72,13 +81,13 @@ export default function Dashboard() {
           onClick={handleBuyNumber}
           style={{ width: "100%", padding: "12px", backgroundColor: "#22c55e", color: "white", fontWeight: "bold", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "16px" }}
         >
-          Buy Number
+          Get Myanmar Number
         </button>
 
         {/* OTP Output Box */}
         {otpNumber && (
           <div style={{ marginTop: "25px", padding: "15px", backgroundColor: "#0f172a", borderRadius: "8px", border: "1px solid #334155" }}>
-            <p style={{ margin: "5px 0", color: "#94a3b8" }}>Phone Number:</p>
+            <p style={{ margin: "5px 0", color: "#94a3b8" }}>Myanmar Phone Number:</p>
             <h3 style={{ margin: "5px 0", color: "#38bdf8" }}>{otpNumber}</h3>
             
             <p style={{ margin: "15px 0 5px 0", color: "#94a3b8" }}>Received OTP Code:</p>
